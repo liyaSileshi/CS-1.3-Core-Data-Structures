@@ -50,6 +50,13 @@ def encode(number, base):
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
     # ...
+
+    base_list = []
+    curr = number % base
+    base_list.append(curr)
+    while curr > base:
+        encode(number, base)
+    return base_list
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
@@ -75,42 +82,12 @@ def convert(digits, base1, base2):
 
 def switch(argument):
     switcher = {
-        '0': 0,
-        '1': 1,
-        '2': 2,
-        '3': 3,
-        '4': 4,
-        '5': 5,
-        '6': 6,
-        '7': 7,
-        '8': 8,
-        '9': 9,
-        'a': 10,
-        'b': 11,
-        'c': 12,
-        'd': 13,
-        'e': 14,
-        'f': 15,
-        'g': 16,
-        'h': 17,
-        'i': 18,
-        'j': 19,
-        'k': 20,
-        'l': 21,
-        'm': 22,
-        'n': 23,
-        'o': 24,
-        'p': 25,
-        'q': 26,
-        'r': 27,
-        's': 28,
-        't': 29,
-        'u': 30,
-        'v': 31,
-        'w': 32,
-        'x': 33,
-        'y': 34,
-        'z': 35
+        '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
+        '6': 6, '7': 7, '8': 8, '9': 9, 'a': 10, 'b': 11,
+        'c': 12, 'd': 13, 'e': 14, 'f': 15, 'g': 16, 'h': 17,
+        'i': 18, 'j': 19, 'k': 20, 'l': 21, 'm': 22, 'n': 23,
+        'o': 24, 'p': 25, 'q': 26, 'r': 27, 's': 28, 't': 29,
+        'u': 30, 'v': 31, 'w': 32, 'x': 33, 'y': 34, 'z': 35
     }
     return switcher.get(argument, "Invalid")
 
