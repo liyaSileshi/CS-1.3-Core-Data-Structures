@@ -40,21 +40,21 @@ def encode(number, base):
     dig_asci = string.printable[0:36]
     base_list = []
     curr = number//base
-    if curr < base:
-        base_list.append(string.printable[number])
-        # print(curr)
-        # print(base_list)
-        return "".join(base_list)
     mod = number % base
-    print(mod)
+ 
+    if curr < base:
+        base_list.append(dig_asci[curr])
+        base_list.append(dig_asci[mod])
+        return "".join(base_list)
+    
+    # print(mod)
     while curr >= base:
-        base_list.append(string.printable[mod])
+        base_list.append(dig_asci[mod])
         mod = curr % base
         curr = curr // base
 
-    base_list.append(string.printable[mod])   
-    base_list.append(string.printable[curr])
-    print(base_list)
+    base_list.append(dig_asci[mod])   
+    base_list.append(dig_asci[curr])
     base_list.reverse()
     return "".join(base_list)
 
@@ -97,4 +97,4 @@ if __name__ == '__main__':
     # main()
     # print(decode('124', 8))
     # switch_decode('z')
-    print(encode(45, 16))
+    print(encode(15, 16))
