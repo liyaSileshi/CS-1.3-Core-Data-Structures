@@ -21,7 +21,7 @@ def decode(digits, base):
     power = len(digits) - 1
     for i in range(len(digits)):
         num = string.printable.index(digits[i].lower())
-        print(num)
+        # print(num)
         sum += num * (base**power)
         power -= 1
     return sum
@@ -39,20 +39,22 @@ def encode(number, base):
     # ...
     dig_asci = string.printable[0:36]
     base_list = []
-    curr = number//base
-    mod = number % base
+    (curr, mod) = (number//base, number % base)
+    # mod = number % base
  
     if curr < base:
-        base_list.append(dig_asci[curr])
+        if curr != 0:
+            base_list.append(dig_asci[curr])
         base_list.append(dig_asci[mod])
         return "".join(base_list)
     
     # print(mod)
     while curr >= base:
         base_list.append(dig_asci[mod])
-        mod = curr % base
-        curr = curr // base
-
+        # mod = curr % base
+        # curr = curr // base
+        encode(curr, base)
+        
     base_list.append(dig_asci[mod])   
     base_list.append(dig_asci[curr])
     base_list.reverse()
@@ -92,9 +94,8 @@ def main():
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
 
-
 if __name__ == '__main__':
     # main()
-    # print(decode('124', 8))
+    print(decode('10', 2))
     # switch_decode('z')
-    print(encode(15, 16))
+    print(encode(45, 16))
