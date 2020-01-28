@@ -16,7 +16,7 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
- 
+  
     sum = 0
     power = len(digits) - 1
     for i in range(len(digits)):
@@ -37,20 +37,26 @@ def encode(number, base):
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
     # ...
-
+    dig_asci = string.printable[0:36]
     base_list = []
-    curr = number/base
-    # base_list.append(curr)
-    while curr > base:
-        mod = number % base
-        # encode(number, base)
-        base_list.append(mod)
+    curr = number//base
+    if curr < base:
+        base_list.append(string.printable[number])
+        # print(curr)
+        # print(base_list)
+        return "".join(base_list)
+    mod = number % base
+    print(mod)
+    while curr >= base:
+        base_list.append(string.printable[mod])
+        mod = curr % base
+        curr = curr // base
 
-    return base_list
-    # TODO: Encode number in hexadecimal (base 16)
-    # ...
-    # TODO: Encode number in any base (2 up to 36)
-    # ...
+    base_list.append(string.printable[mod])   
+    base_list.append(string.printable[curr])
+    print(base_list)
+    base_list.reverse()
+    return "".join(base_list)
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -89,6 +95,6 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(decode('124', 8))
+    # print(decode('124', 8))
     # switch_decode('z')
-    # print(encode(10, 2))
+    print(encode(45, 16))
