@@ -35,28 +35,25 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
-    # ...
+   
     dig_asci = string.printable[0:36]
     base_list = []
-    (curr, mod) = (number//base, number % base)
-    # mod = number % base
- 
-    if curr < base:
-        if curr != 0:
-            base_list.append(dig_asci[curr])
+    (quo, mod) = (number//base, number % base)
+   
+    if quo < base:
+        if quo != 0:
+            base_list.append(dig_asci[quo])
         base_list.append(dig_asci[mod])
         return "".join(base_list)
-    
-    # print(mod)
-    while curr >= base:
+ 
+    while quo >= base:
         base_list.append(dig_asci[mod])
-        # mod = curr % base
-        # curr = curr // base
-        encode(curr, base)
-        
+        # encode(curr, base)
+        mod = quo % base
+        quo = quo // base
+
     base_list.append(dig_asci[mod])   
-    base_list.append(dig_asci[curr])
+    base_list.append(dig_asci[quo])
     base_list.reverse()
     return "".join(base_list)
 
@@ -69,15 +66,10 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
 
+    #Convert digits from any base to any base (2 up to 36)
+    base_ten = decode(digits, base1)
+    return encode(base_ten, base2)
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
@@ -96,6 +88,7 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(decode('10', 2))
+    # print(decode('10', 2))
     # switch_decode('z')
-    print(encode(45, 16))
+    print(encode(128, 2))
+    # print(convert('42', 10, 2))
