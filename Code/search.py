@@ -7,7 +7,6 @@ def linear_search(array, item):
     # return linear_search_iterative(array, item)
     return linear_search_recursive(array, item)
 
-
 def linear_search_iterative(array, item):
     # loop over all array values until item is found
     for index, value in enumerate(array):
@@ -15,14 +14,10 @@ def linear_search_iterative(array, item):
             return index  # found
     return None  # not found
 
-
 def linear_search_recursive(array, item, index=0):
-    # TODO: implement linear search recursively here
-    # pass
-    # once implemented, change linear_search to call linear_search_recursive
-    # to verify that your recursive implementation passes all tests
+    #implement linear search recursively here
     if index >= len(array):
-        return None
+        return None #not found
 
     if item == array[index]:
         return index #found
@@ -40,10 +35,22 @@ def binary_search(array, item):
 
 def binary_search_iterative(array, item):
     # TODO: implement binary search iteratively here
-    pass
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
+    left = 0
+    right = len(array) - 1
 
+    while left <= right:
+        mid = round((left + right) / 2)
+        # mid = (left+right)//2
+        if array[mid] == item:
+            return mid
+        elif array[mid] > item:
+            right = mid - 1
+
+        elif array[mid] < item:
+            left = mid + 1
+    return None
 
 def binary_search_recursive(array, item, left=None, right=None):
     # TODO: implement binary search recursively here
@@ -54,10 +61,11 @@ def binary_search_recursive(array, item, left=None, right=None):
 def main():
     import sys
     args = sys.argv[1:]  # Ignore script file name
-    arr = [1,2,3]
+    arr = [1,2,3,4]
     # if len(args) == 1:
     #     num = int(args[0])
-    result = linear_search(arr, 3)
+    # result = linear_search(arr, 3)
+    result = binary_search_iterative(arr, 4)
         # print('linear_search({} in array {}) => index {}'.format(3, arr, result))
     print(result)
     # else:
