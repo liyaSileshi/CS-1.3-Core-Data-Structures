@@ -37,20 +37,19 @@ def encode(number, base):
     assert number >= 0, 'number is negative: {}'.format(number)
    
     dig_asci = string.printable[0:36]
-    base_list = []
+    base_list = ''
 
     if number < base:
-        base_list.append(dig_asci[number])
-        return "".join(base_list)
+        base_list += dig_asci[number]
+        return base_list
 
     while number >= base:
         (quo, mod) = (number//base, number % base)
-        base_list.append(dig_asci[mod])
+        base_list += dig_asci[mod]
         number = quo
   
-    base_list.append(dig_asci[quo])
-    base_list.reverse()
-    return "".join(base_list)
+    base_list += dig_asci[quo]
+    return base_list[::-1] #string reverse using slicing method
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
