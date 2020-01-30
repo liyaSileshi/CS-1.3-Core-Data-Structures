@@ -38,21 +38,16 @@ def encode(number, base):
    
     dig_asci = string.printable[0:36]
     base_list = []
-    (quo, mod) = (number//base, number % base)
-   
-    if quo < base:
-        if quo != 0:
-            base_list.append(dig_asci[quo])
-        base_list.append(dig_asci[mod])
-        return "".join(base_list)
- 
-    while quo >= base:
-        base_list.append(dig_asci[mod])
-        # encode(curr, base)
-        mod = quo % base
-        quo = quo // base
 
-    base_list.append(dig_asci[mod])   
+    if number < base:
+        base_list.append(dig_asci[number])
+        return "".join(base_list)
+
+    while number >= base:
+        (quo, mod) = (number//base, number % base)
+        base_list.append(dig_asci[mod])
+        number = quo
+  
     base_list.append(dig_asci[quo])
     base_list.reverse()
     return "".join(base_list)
