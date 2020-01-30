@@ -29,20 +29,17 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return binary_search_iterative(array, item)
-    # return binary_search_recursive(array, item)
-
+    # return binary_search_iterative(array, item)
+    return binary_search_recursive(array, item, left = 0, right = len(array) - 1)
 
 def binary_search_iterative(array, item):
-    # TODO: implement binary search iteratively here
-    # once implemented, change binary_search to call binary_search_iterative
-    # to verify that your iterative implementation passes all tests
+    # implement binary search iteratively here
     left = 0
     right = len(array) - 1
 
     while left <= right:
         mid = round((left + right) / 2)
-        # mid = (left+right)//2
+ 
         if array[mid] == item:
             return mid
         elif array[mid] > item:
@@ -53,19 +50,30 @@ def binary_search_iterative(array, item):
     return None
 
 def binary_search_recursive(array, item, left=None, right=None):
-    # TODO: implement binary search recursively here
-    pass
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
+    # implement binary search recursively here
+    if left > right:
+        return None
+
+    mid = round((left + right) / 2)
+    if array[mid] == item:
+        return mid
+
+    elif array[mid] > item:
+        right = mid - 1
+        return binary_search_recursive(array, item, left, right)
+
+    elif array[mid] < item:
+        left = mid + 1
+        return binary_search_recursive(array, item, left, right)
 
 def main():
     import sys
     args = sys.argv[1:]  # Ignore script file name
-    arr = [1,2,3,4]
+    arr = [1,2,3,4,5]
     # if len(args) == 1:
     #     num = int(args[0])
     # result = linear_search(arr, 3)
-    result = binary_search_iterative(arr, 4)
+    result = binary_search(arr, 11)
         # print('linear_search({} in array {}) => index {}'.format(3, arr, result))
     print(result)
     # else:
