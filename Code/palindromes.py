@@ -14,6 +14,8 @@ def is_palindrome(text):
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
     # return is_palindrome_iterative(text)
+    # print(clean(text))
+    text = clean(text)
     return is_palindrome_recursive(text, left=0, right=len(text)-1)
 
 
@@ -38,24 +40,20 @@ def clean(text):
 
 def is_palindrome_recursive(text, left=None, right=None):
     word = clean(text)
-    left = 0
-    right = len(word) - 1
-    print(left, right)
-    if len(word) <= 1:
+    if len(word) <= 1: #if there is only one letter or no letter at all
         return True
 
-    if abs(left - right) <= 1:
+    if abs(left - right) <= 1: #if the index is the same or side by side
         if word[left] == word[right]:
             return True
         else:
             return False
 
-    if left <= right:
+    if left <= right: #not crossing eachother
         if word[left] == word[right]:
             return is_palindrome_recursive(word, left+1, right-1)
         else:
             return False
-    # return True
 
 def main():
     import sys
@@ -70,9 +68,9 @@ def main():
         print('Usage: {} string1 string2 ... stringN'.format(sys.argv[0]))
         print('  checks if each argument given is a palindrome')
 
-
 if __name__ == '__main__':
     # main()
-    text = 'racecar!' 
+    text = 'ABC' 
+    word = clean(text)
     # print(is_palindrome_iterative('Racecar'))
-    print(is_palindrome_recursive(text, 0, len(text)-1))
+    print(is_palindrome_recursive(word, 0, len(word)-1))
