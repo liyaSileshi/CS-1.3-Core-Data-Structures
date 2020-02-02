@@ -13,23 +13,49 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text, left=0, right=len(text)-1)
 
 
 def is_palindrome_iterative(text):
-    # TODO: implement the is_palindrome function iteratively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_iterative
-    # to verify that your iterative implementation passes all tests
+    word = clean(text)
+    left = 0
+    right = len(word) - 1
+    while(left <= right): #while there are characters to compare
+        if word[left] == word[right]:
+            left += 1
+            right -= 1
+        else:
+            return False
+    return True
 
+def clean(text):
+    word = ''
+    for i in text.lower(): #to clean the text from punctuation, whitespace, CAPs
+        if i in string.ascii_lowercase:
+            word += i
+    return word
 
 def is_palindrome_recursive(text, left=None, right=None):
-    # TODO: implement the is_palindrome function recursively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    word = clean(text)
+    left = 0
+    right = len(word) - 1
+    print(left, right)
+    if len(word) <= 1:
+        return True
 
+    if abs(left - right) <= 1:
+        if word[left] == word[right]:
+            return True
+        else:
+            return False
+
+    if left <= right:
+        if word[left] == word[right]:
+            return is_palindrome_recursive(word, left+1, right-1)
+        else:
+            return False
+    # return True
 
 def main():
     import sys
@@ -46,4 +72,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    text = 'racecar!' 
+    # print(is_palindrome_iterative('Racecar'))
+    print(is_palindrome_recursive(text, 0, len(text)-1))

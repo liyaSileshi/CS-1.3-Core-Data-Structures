@@ -40,16 +40,16 @@ def encode(number, base):
     base_list = ''
 
     if number < base:
-        base_list += dig_asci[number]
+        base_list = dig_asci[number] + base_list
         return base_list
 
     while number >= base:
         (quo, mod) = (number//base, number % base)
-        base_list += dig_asci[mod]
+        base_list = dig_asci[mod] + base_list
         number = quo
   
-    base_list += dig_asci[quo]
-    return base_list[::-1] #string reverse using slicing method
+    base_list = dig_asci[quo] + base_list #prepend
+    return base_list
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
