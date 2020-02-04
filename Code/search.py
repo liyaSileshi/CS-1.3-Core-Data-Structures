@@ -8,6 +8,7 @@ def linear_search(array, item):
     return linear_search_recursive(array, item)
 
 def linear_search_iterative(array, item):
+    """return the first index of item in array or None if item is not found"""
     # loop over all array values until item is found
     for index, value in enumerate(array):
         if item == value:
@@ -15,6 +16,7 @@ def linear_search_iterative(array, item):
     return None  # not found
 
 def linear_search_recursive(array, item, index=0):
+    """return the first index of item in array or None if item is not found"""
     #implement linear search recursively here
     if index >= len(array):
         return None #not found
@@ -33,7 +35,7 @@ def binary_search(array, item):
     return binary_search_recursive(array, item, left = 0, right = len(array) - 1)
 
 def binary_search_iterative(array, item):
-    # implement binary search iteratively here
+    """return the index of item in sorted array or None if item is not found"""
     left = 0
     right = len(array) - 1
 
@@ -43,15 +45,15 @@ def binary_search_iterative(array, item):
         if array[mid] == item:
             return mid
         elif array[mid] > item:
-            right = mid - 1
+            right = mid - 1 #change position of right
 
         elif array[mid] < item:
-            left = mid + 1
+            left = mid + 1 #change position of left
     return None
 
 def binary_search_recursive(array, item, left=None, right=None):
-    # implement binary search recursively here
-    if left > right:
+    """return the index of item in sorted array or None if item is not found"""
+    if left > right: #if they crossed eachother, not found
         return None
 
     mid = round((left + right) / 2)
@@ -60,7 +62,7 @@ def binary_search_recursive(array, item, left=None, right=None):
 
     elif array[mid] > item:
         right = mid - 1
-        return binary_search_recursive(array, item, left, right)
+        return binary_search_recursive(array, item, left, right) 
 
     elif array[mid] < item:
         left = mid + 1
