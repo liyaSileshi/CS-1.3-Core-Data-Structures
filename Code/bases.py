@@ -18,11 +18,10 @@ def decode(digits, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
   
     sum = 0
-    power = len(digits) - 1
+    power = len(digits) - 1 #starts with the biggest power (right to left)
     for i in range(len(digits)):
-        num = string.printable.index(digits[i].lower())
-        # print(num)
-        sum += num * (base**power)
+        num = string.printable.index(digits[i].lower()) #gets the index from string.printable based on the digit[i]
+        sum += num * (base**power) #adds up each digits/characters value
         power -= 1
     return sum
 
@@ -39,11 +38,11 @@ def encode(number, base):
     dig_asci = string.printable[0:36]
     base_list = ''
 
-    if number < base:
-        base_list = dig_asci[number] + base_list
+    if number < base: #division not necessary
+        base_list = dig_asci[number] + base_list #prepend
         return base_list
 
-    while number >= base:
+    while number >= base: #divide until not divisible
         (quo, mod) = (number//base, number % base)
         base_list = dig_asci[mod] + base_list
         number = quo
@@ -81,8 +80,8 @@ def main():
         print('Converts digits from base1 to base2')
 
 if __name__ == '__main__':
-    # main()
+    main()
     # print(decode('10', 2))
     # switch_decode('z')
-    print(encode(128, 2))
+    # print(encode(128, 2))
     # print(convert('42', 10, 2))
