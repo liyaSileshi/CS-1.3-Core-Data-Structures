@@ -8,13 +8,12 @@ def contains(text, pattern):
     flag = None
     # pattern_index = 0
     first_pattern = 0
+    pattern_index = []
     if pattern == '': #all strings contain empty string
         return True
 
     for i in range(len(text)):
         if text[i] == pattern[0]:
-            # first_pattern.append(i)
-            # print(first_pattern)
             if len(pattern) == 1: #only one ch in pattern
                 first_pattern = 0
                 return True
@@ -24,11 +23,9 @@ def contains(text, pattern):
                 elif text[i+j] == pattern[j]:
                     flag = True
                     first_pattern += 1
-                    # print(flag)
                 else:
                     
                     flag = False
-                    # print(flag)
                     break
 
     if flag == None: #no pattern found at all, doesn't go to the nested loop
@@ -55,7 +52,29 @@ def find_all_indexes(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
-    
+    pattern_index = []
+    if pattern == '': #all strings contain empty string
+        for i in range(len(text)):
+            pattern_index.append(i) #appends all index
+        return pattern_index
+
+    if contains(text, pattern): 
+        # return [i for i in range(len(text)) if text.startswith(pattern, i)]
+        for i in range(len(text)):
+            if text.startswith(pattern, i): #second paramenter specifies start of search
+                pattern_index.append(i)
+        return pattern_index
+
+    else:
+        return [] #if pattern not in text
+
+
+    # if contains(text, pattern):       
+    #     pattern_index.append(text.index(pattern))
+    #     # find_index()
+    #     # return text.index(pattern)
+    #     return pattern_index
+    # return pattern_index
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
@@ -89,4 +108,4 @@ def main():
 if __name__ == '__main__':
     # main()
     # print(contains('abra cadabra', 'adab'))
-    find_index('abc', '')
+    print(find_all_indexes('aaa', 'a'))
