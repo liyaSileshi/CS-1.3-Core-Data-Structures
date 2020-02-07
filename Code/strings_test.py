@@ -18,7 +18,7 @@ class StringsTest(unittest.TestCase):
         assert contains('aaa', 'a') is True  # multiple occurrences
         assert contains('aaa', 'aa') is True  # overlapping pattern
         # TODO: Write more positive test cases with assert is True statements
-        # ...
+        assert contains('bbbbb', 'bbb') is True  # overlapping pattern
 
     def test_contains_with_non_matching_patterns(self):
         # Negative test cases (counterexamples) with non-matching patterns
@@ -27,7 +27,8 @@ class StringsTest(unittest.TestCase):
         assert contains('abc', 'az') is False  # first letter, but not last
         assert contains('abc', 'abz') is False  # first 2 letters, but not last
         # TODO: Write more negative test cases with assert is False statements
-        # ...
+        
+        assert contains('abc', 'bcd') is False #last 2 letters, but not first
 
     def test_contains_with_complex_patterns(self):
         # Difficult test cases (examples) with complex patterns
@@ -91,6 +92,7 @@ class StringsTest(unittest.TestCase):
         assert find_all_indexes('aaa', 'aa') == [0, 1]  # overlapping pattern
         # TODO: Write more positive test cases with assert equal list statements
         # ...
+        assert find_all_indexes('bbbbb', 'bbb') == [0, 1, 2]
 
     def test_find_all_indexes_with_non_matching_patterns(self):
         # Negative test cases (counterexamples) with non-matching patterns

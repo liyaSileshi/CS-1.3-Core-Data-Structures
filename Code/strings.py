@@ -6,14 +6,15 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
     flag = None
-    # pattern_index = 0
     first_pattern = 0
-    pattern_index = []
+    # index_start = 0
+    index_stop = len(text) - len(pattern) + 1
     if pattern == '': #all strings contain empty string
         return True
 
-    for i in range(len(text)):
+    for i in range(index_stop):
         if text[i] == pattern[0]:
+            #  and i < len(text) - len(pattern) - 1:
             if len(pattern) == 1: #only one ch in pattern
                 first_pattern = 0
                 return True
@@ -23,6 +24,7 @@ def contains(text, pattern):
                 elif text[i+j] == pattern[j]:
                     flag = True
                     first_pattern += 1
+                    index_stop += 1
                 else:
                     
                     flag = False
@@ -69,13 +71,6 @@ def find_all_indexes(text, pattern):
         return [] #if pattern not in text
 
 
-    # if contains(text, pattern):       
-    #     pattern_index.append(text.index(pattern))
-    #     # find_index()
-    #     # return text.index(pattern)
-    #     return pattern_index
-    # return pattern_index
-
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
     print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
@@ -107,5 +102,6 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    # print(contains('abra cadabra', 'adab'))
-    print(find_all_indexes('aaa', 'a'))
+    print(contains('abc', 'bcd'))
+    # print(find_all_indexes('hahahahaha', 'haha'))
+    # print(find_index('hahahahaha', 'haha'))
