@@ -8,7 +8,7 @@ def contains(text, pattern):
     flag = None
     first_pattern = 0
     # index_start = 0
-    index_stop = len(text) - len(pattern) + 1
+    index_stop = len(text) - len(pattern) + 1 #to not include indexes that will not be compared
     if pattern == '': #all strings contain empty string
         return True
 
