@@ -78,7 +78,19 @@ class LinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node at the given index and return its data
-
+        if index == 0: #index of the first item
+            return self.head.data
+        elif index == self.size - 1: #index of last item
+            return self.tail.data
+        else: 
+            num = 0
+            pointer = self.head
+            while num <= index:
+                if index == num: 
+                    return pointer.data
+                else:
+                    num += 1
+                    pointer = pointer.next #advance the pointer
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
@@ -89,9 +101,6 @@ class LinkedList(object):
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
-        # if index == 0 and self.size == 0: #inserting the first item
-        #     self.append(item)
-
         if index == 0:
             self.prepend(item) #insert item at beginning
 
