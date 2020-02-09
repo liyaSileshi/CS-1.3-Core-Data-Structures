@@ -30,7 +30,9 @@ class LinkedQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+
+        Running time: O(1) – Appending at the end doesn't require
+        to loop through the ll since we have access to the tail."""
         # Insert given item
         self.list.append(item)
 
@@ -45,7 +47,9 @@ class LinkedQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+
+        Running time: O(1) – deleting the first item doesn't require
+        looping through the entire list. We're just moving the head pointer"""
         # Remove and return front item, if any
         if self.is_empty():
             raise ValueError
@@ -82,7 +86,10 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+
+        Running time: O(1) – Dynamic arrays have extra empty spaces,
+        so when we push an item it goes to that space. Instead of making 
+        a new array (for most cases)"""
         # Insert given item
         self.list.append(item) #inserts item at end
 
@@ -97,7 +104,7 @@ class ArrayQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n-i) – Since the array items needs to shift to the left"""
         # Remove and return front item, if any
         if self.is_empty():
             raise ValueError
@@ -108,5 +115,5 @@ class ArrayQueue(object):
 
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-# Queue = LinkedQueue
-Queue = ArrayQueue
+Queue = LinkedQueue
+# Queue = ArrayQueue
