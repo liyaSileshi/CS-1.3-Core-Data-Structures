@@ -99,7 +99,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
     # print(contains('abc', 'bcd'))
     # print(find_all_indexes('hahahahaha', 'haha'))
-    # print(find_index('hahahahaha', 'haha'))
+    print(find_index('c', 'cde'))
