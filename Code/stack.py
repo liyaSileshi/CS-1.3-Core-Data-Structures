@@ -47,7 +47,7 @@ class LinkedStack(object):
         if self.is_empty():
             return None
 
-        return self.list.head.data #return the head
+        return self.list.get_at_index(0) #return the head
 
     def pop(self):
         """Remove and return the item on the top of this stack,
@@ -59,7 +59,7 @@ class LinkedStack(object):
         if self.is_empty():
             raise ValueError
 
-        first_item = self.list.head.data
+        first_item = self.list.get_at_index(0)
         self.list.delete(first_item)
         return first_item
 

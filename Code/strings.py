@@ -1,32 +1,30 @@
 #!python
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text."""
+    """Return a boolean indicating whether pattern occurs in text.
+    Runtime: Best Case - O(p)- if the pattern is found at the beginnning of the text
+    Worst Case- O(n*p)- if pattern not found, or found at the end of the text"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
     flag = None
     first_pattern = 0
-    # index_start = 0
     index_stop = len(text) - len(pattern) + 1 #to not include indexes that will not be compared
     if pattern == '': #all strings contain empty string
         return True
 
     for i in range(index_stop):
         if text[i] == pattern[0]:
-            #  and i < len(text) - len(pattern) - 1:
             if len(pattern) == 1: #only one ch in pattern
                 first_pattern = 0
                 return True
             for j in range(1, len(pattern)):
                 if i+j >= len(text):
                     break
-                elif text[i+j] == pattern[j]:
+                elif text[i+j] == pattern[j]: #compare pattern index to text index
                     flag = True
                     first_pattern += 1
-                    index_stop += 1
+                    index_stop += 1 #increment the range of indexes
                 else:
-                    
                     flag = False
                     break
 
@@ -40,20 +38,22 @@ def contains(text, pattern):
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found."""
+    or None if not found.
+    Runtime: Best Case - O(p)- if the pattern is found at the beginnning of the text
+    Worst Case- O(t*p)- if pattern not found, or found at the end of the text
+    """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
 
     if contains(text, pattern):
         return text.index(pattern)
     
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found."""
+    or an empty list if not found.
+    Runtime: O(t*p)"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
     pattern_index = []
     if pattern == '': #all strings contain empty string
         for i in range(len(text)):
@@ -74,10 +74,8 @@ def find_all_indexes(text, pattern):
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
     print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
-    # TODO: Uncomment these lines after you implement find_index
     index = find_index(text, pattern)
     print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
-    # TODO: Uncomment these lines after you implement find_all_indexes
     indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 
@@ -101,7 +99,7 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    print(contains('abc', 'bcd'))
+    main()
+    # print(contains('abc', 'bcd'))
     # print(find_all_indexes('hahahahaha', 'haha'))
     # print(find_index('hahahahaha', 'haha'))
