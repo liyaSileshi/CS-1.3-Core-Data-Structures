@@ -6,35 +6,36 @@ def contains(text, pattern):
     Worst Case- O(n*p)- if pattern not found, or found at the end of the text"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    flag = None
-    first_pattern = 0
-    index_stop = len(text) - len(pattern) + 1 #to not include indexes that will not be compared
-    if pattern == '': #all strings contain empty string
-        return True
+    # flag = None
+    # first_pattern = 0
+    # index_stop = len(text) - len(pattern) + 1 #to not include indexes that will not be compared
+    # if pattern == '': #all strings contain empty string
+    #     return True 
 
-    for i in range(index_stop):
-        if text[i] == pattern[0]:
-            if len(pattern) == 1: #only one ch in pattern
-                first_pattern = 0
-                return True
-            for j in range(1, len(pattern)):
-                if i+j >= len(text):
-                    break
-                elif text[i+j] == pattern[j]: #compare pattern index to text index
-                    flag = True
-                    first_pattern += 1
-                    index_stop += 1 #increment the range of indexes
-                else:
-                    flag = False
-                    break
+    # for i in range(index_stop):
+    #     if text[i] == pattern[0]:
+    #         if len(pattern) == 1: #only one ch in pattern
+    #             first_pattern = 0
+    #             return True
+    #         for j in range(1, len(pattern)):
+    #             if i+j >= len(text):
+    #                 break
+    #             elif text[i+j] == pattern[j]: #compare pattern index to text index
+    #                 flag = True
+    #                 first_pattern += 1 
+    #                 index_stop += 1 #increment the range of indexes
+    #             else:
+    #                 flag = False
+    #                 break
 
-    if flag == None: #no pattern found at all, doesn't go to the nested loop
-        return False
+    # if flag == None: #no pattern found at all, doesn't go to the nested loop
+    #     return False
 
-    if first_pattern >= len(pattern) - 1: #atleast one pattern is found
-        flag = True
+    # if first_pattern >= len(pattern) - 1: #atleast one pattern is found
+    #     flag = True
 
-    return flag
+    # return flag
+    return find_all_indexes(text, pattern) != []
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -55,20 +56,33 @@ def find_all_indexes(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     pattern_index = []
+    flag = None
+    first_pattern = 0
+    index_stop = len(text) - len(pattern) + 1 #to not include indexes that will not be compared
+
     if pattern == '': #all strings contain empty string
         for i in range(len(text)):
             pattern_index.append(i) #appends all index
         return pattern_index
 
-    if contains(text, pattern): 
-        # return [i for i in range(len(text)) if text.startswith(pattern, i)]
-        for i in range(len(text)):
-            if text.startswith(pattern, i): #second paramenter specifies start of search
-                pattern_index.append(i)
-        return pattern_index
 
-    else:
-        return [] #if pattern not in text
+    for i in range(index_stop):
+        if text[i] == pattern[0]:
+            if len(pattern) == 1:
+                pattern_index.append(i)
+
+            for j in range(1, len(pattern)):
+                if i+j >= len(text):
+                    break
+                elif text[i+j] == pattern[j]:
+                    index_stop += 1
+                    if len(pattern)-1 == j:
+                        pattern_index.append(i)
+                else:
+                    break
+                 
+    # else:
+    return pattern_index #if pattern not in text
 
 
 def test_string_algorithms(text, pattern):
