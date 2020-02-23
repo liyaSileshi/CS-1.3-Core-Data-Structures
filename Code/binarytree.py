@@ -236,7 +236,10 @@ class BinarySearchTree(object):
         if node is None:
             raise ValueError
         if node.left is None and node.right is None:
-            #delete node
+            if node == self.root:#if node is root
+                self.root.data = None
+                # self.root = None
+                return
             #find it's parent
             parent = self._find_parent_node_iterative(node.data)
             #check wether the parent is greater or less than the child
@@ -245,6 +248,33 @@ class BinarySearchTree(object):
             else: #node is on the right side
                 parent.right = None
             #make either the left or right side point to null based on that
+        elif node.left is None and node.right is not None: #has only right child
+            #find it's parent
+            parent = self._find_parent_node_iterative(node.data)
+            #parent will point to the child of the node we want to delete
+            parent.right = node.right
+
+        elif node.right is None and node.left is not None: #only left child
+            #find it's parent
+            parent = self._find_parent_node_iterative(node.data)
+            #parent will point to the child of the node we want to delete
+            parent.left = node.left
+
+        else: #if it has both a left and a right
+            #find successor of the node (the minimum in right subtree)
+            min_right = self.find_min_right(node)
+            #copy the value of the minimum to the target node
+            temp = min_right
+            #delete the duplicate (minimum right subtree)
+            self.delete(min_right)
+            #copy the value of the minimum to the target node
+            node.data = min_right
+
+    def find_min_right(self, node):
+        inorder_items = self.items_in_order() #get all items in order
+        node_index = inorder_items.index(node.data) #get index of node data
+        next_node_index = node_index + 1 #calculate the next node index (to get minimum in right subtree)
+        return inorder_items[next_node_index] #minimum right subtree node data
 
 
     def items_in_order(self):
@@ -373,6 +403,7 @@ class BinarySearchTree(object):
 def test_binary_search_tree():
     # Create a complete binary search tree of 3, 7, or 15 items in level-order
     items = [2, 1, 3]
+    # items = [5, 2, 1, 3, 0, 4]
     # items = [8,4,12,2,6,1,3,5,7,9]
     # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
     # print('items: {}'.format(items))
@@ -385,8 +416,14 @@ def test_binary_search_tree():
         tree.insert(item)
     print(tree.height())
     print(tree.items_in_order())
+    tree.delete(2)
+    print(tree.items_in_order())
     tree.delete(1)
     print(tree.items_in_order())
+    tree.delete(3)
+    print(tree.items_in_order())
+    # node = tree._find_node_iterative(1)
+    # print(tree.find_min_right(node))
         # print('insert({}), size: {}'.format(item, tree.size))
     # print('root: {}'.format(tree.root))
     # print('tree' ,tree.root.left)
