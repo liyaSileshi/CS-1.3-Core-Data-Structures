@@ -226,13 +226,26 @@ class BinarySearchTree(object):
             return self._find_parent_node_recursive(item, node, parent)
 
     def delete(self, item):
-        pass
         """Remove given item from this tree, if present, or raise ValueError.
         TODO: Best case running time: ??? under what conditions?
         TODO: Worst case running time: ??? under what conditions?"""
         # TODO: Use helper methods and break this algorithm down into 3 cases
         # based on how many children the node containing the given item has and
         # implement new helper methods for subtasks of the more complex cases
+        node = self._find_node_iterative(item)
+        if node is None:
+            raise ValueError
+        if node.left is None and node.right is None:
+            #delete node
+            #find it's parent
+            parent = self._find_parent_node_iterative(node.data)
+            #check wether the parent is greater or less than the child
+            if node.data < parent.data: #node is on the left side
+                parent.left = None
+            else: #node is on the right side
+                parent.right = None
+            #make either the left or right side point to null based on that
+
 
     def items_in_order(self):
         """Return an in-order list of all items in this binary search tree."""
@@ -371,6 +384,8 @@ def test_binary_search_tree():
     for item in items:
         tree.insert(item)
     print(tree.height())
+    print(tree.items_in_order())
+    tree.delete(1)
     print(tree.items_in_order())
         # print('insert({}), size: {}'.format(item, tree.size))
     # print('root: {}'.format(tree.root))
