@@ -76,7 +76,7 @@ class HashTable(object):
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
          Best case running time: Omega(1) if item is near the head of the list.
-        Worst case running time: O(n) if item is near the tail of the list or
+        Worst case running time: O(l) if item is near the tail of the list or
         not present and we need to loop through all n nodes in the list."""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
@@ -88,7 +88,7 @@ class HashTable(object):
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         Best case running time: Omega(1) if item is near the head of the list.
-        Worst case running time: O(n) if item is near the tail of the list or
+        Worst case running time: O(l) if item is near the tail of the list or
         not present and we need to loop through all n nodes in the list.
         """
         # Find the bucket the given key belongs in
@@ -107,7 +107,8 @@ class HashTable(object):
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         Best case running time: O(1) if item is around the beginning of the head
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Worst case running time: O(l2) since for both find and delete method
+        we loop through the bucket."""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -129,8 +130,9 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if entry is the head node of the bucket
+        Worst case running time: O(l).O(l) since for both find and delete method
+        we loop through the bucket"""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -147,27 +149,24 @@ class HashTable(object):
         """Resize this hash table's buckets and rehash all key-value entries.
         Should be called automatically when load factor exceeds a threshold
         such as 0.75 after an insertion (when set is called with a new key).
-        Best and worst case running time: ??? under what conditions? [TODO]
-        Best and worst case space usage: ??? what uses this memory? [TODO]"""
+        Best and worst case running time: O(n).O(l2) for each node(item), we have to
+        do the set operation which is O(l2)
+        Best and worst case space usage: O(b) creating Linked list for each bucket when calling
+        self.init when passing the new size"""
         # If unspecified, choose new size dynamically based on current size
         if new_size is None:
             new_size = len(self.buckets) * 2  # Double size
         # Option to reduce size if buckets are sparsely filled (low load factor)
         elif new_size is 0:
             new_size = len(self.buckets) / 2  # Half size
-
-
-        # TODO: Get a list to temporarily hold all current key-value entries
+        #Get a list to temporarily hold all current key-value entries
         temp_list = self.items()
-        # TODO: Create a new list of new_size total empty linked list buckets
-        # self.buckets = [LinkedList() for i in range(new_size)] 
-        # self.size = 0
-
+        #Create a new list of new_size total empty linked list buckets
         self.__init__(new_size)
-        # TODO: Insert each key-value entry into the new list of buckets,
+        #Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        for key, value in temp_list:
-            self.set(key, value)
+        for key, value in temp_list: 
+            self.set(key, value) #o(n2)
 
 def test_hash_table():
     ht = HashTable(4)
