@@ -22,9 +22,8 @@ def find_index(text, pattern):
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-
-    if contains(text, pattern):
-        return text.index(pattern)
+    
+    return self.find_all_indexes[0]
     
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,

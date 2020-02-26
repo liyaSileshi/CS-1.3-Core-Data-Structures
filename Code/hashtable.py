@@ -25,13 +25,14 @@ class HashTable(object):
 
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) since it's calculating and assigning value"""
         #Calculate load factor
         return self.size/len(self.buckets)
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(b.l) it's looping through each bucket and
+        within each bucket looping through each items of the linked list key,value pair"""
         # Collect all keys in each of the buckets
         all_keys = []
         for bucket in self.buckets:
@@ -41,7 +42,8 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(b.l) it's looping through each bucket and
+        within each bucket looping through each items of the linked list key,value pair"""
         # Collect all values in each of the buckets
         all_values = []
         for bucket in self.buckets:
@@ -51,7 +53,8 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all entries (key-value pairs) in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(b.l) it depends on the number of buckets and 
+        items within each bucket since it loops through each bucket and items within it."""
         # Collect all pairs of key-value entries in each of the buckets
         all_items = []
         for bucket in self.buckets:
@@ -60,7 +63,8 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(b.l) bucket.length() method loops through
+        the entire linked list and we have to call it on each bucket"""
         # Count number of key-value entries in each of the buckets
         item_count = 0
         for bucket in self.buckets:
@@ -71,8 +75,9 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+         Best case running time: Omega(1) if item is near the head of the list.
+        Worst case running time: O(n) if item is near the tail of the list or
+        not present and we need to loop through all n nodes in the list."""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -82,8 +87,10 @@ class HashTable(object):
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: Omega(1) if item is near the head of the list.
+        Worst case running time: O(n) if item is near the tail of the list or
+        not present and we need to loop through all n nodes in the list.
+        """
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -99,7 +106,7 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        Best case running time: ??? under what conditions? [TODO]
+        Best case running time: O(1) if item is around the beginning of the head
         Worst case running time: ??? under what conditions? [TODO]"""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)

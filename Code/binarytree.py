@@ -206,7 +206,7 @@ class BinarySearchTree(object):
         # Check if starting node exists
         if node is None: #no nodes
             # Not found (base case)
-            return parent #!!!!!!!!!!!!!??????? #not return None###################
+            return None 
 
         #Check if the given item matches the node's data
         if item == node.data:
@@ -215,15 +215,19 @@ class BinarySearchTree(object):
         #Check if the given item is less than the node's data
         elif item < node.data:
             #Recursively descend to the node's left child, if it exists
-            parent = node
-            node = node.left
-            return self._find_parent_node_recursive(item, node, parent)
+            # return node if node.left is None else self._find_parent_node_recursive(item, node.left, node)
+            if node.left is None:
+                return node #node will be the parent if we want to insert the item
+            else:
+                return self._find_parent_node_recursive(item, node.left, node)
         #Check if the given item is greater than the node's data
         elif item > node.data:
             #Recursively descend to the node's right child, if it exists
-            parent = node
-            node = node.right
-            return self._find_parent_node_recursive(item, node, parent)
+            # return node if node.right is None else self._find_parent_node_recursive(item, node.right, node)
+            if node.right is None:
+                return node #node will be the parent if we want to insert the item
+            else:
+                return self._find_parent_node_recursive(item, node.right, node)
 
     def delete(self, item):
         """Remove given item from this tree, if present, or raise ValueError.
@@ -240,6 +244,7 @@ class BinarySearchTree(object):
                 self.root.data = None
                 # self.root = None
                 return
+                
             #find it's parent
             parent = self._find_parent_node_iterative(node.data)
             #check wether the parent is greater or less than the child
