@@ -7,14 +7,21 @@ class Set(object):
             for element in elements:
                 self.add(element)
 
-    def contains(self,item):
-        
+    def contains(self,element):
+        return self.tree.contains(element)
 
-    def add(self, item):
-        pass
+    def add(self, element):
+        #if the element is not already in the set, insert it
+        if not self.contains(element):
+            self.tree.insert(element)
 
-    def remove(self, item):
-        pass
+    def remove(self, element):
+        #delete from the set, if it's in the set
+        #else raise key error
+        if self.contains(element):
+            self.tree.delete(element)
+        else:
+            raise KeyError
 
     def union(self, other_set):
         pass
