@@ -84,6 +84,13 @@ class SetTreeTest(unittest.TestCase):
         new_set2 = set_tree1.difference(set_tree3)
         assert new_set2.tree.items_in_order() == [] #all items are similar
 
-    
+    def test_subset(self):
+        set_tree1 = Set_Tree([1,2,3,4])
+        set_tree2 = Set_Tree([1,2,3])
+        assert set_tree1.is_subset(set_tree2) == True
+        set_tree3 = Set_Tree([])
+        assert set_tree1.is_subset(set_tree3) == True #empty set is a subset of all sets
+        set_tree4 = Set_Tree([1,2,3,5])
+        assert set_tree1.is_subset(set_tree4) == False
 if __name__ == '__main__':
     unittest.main()

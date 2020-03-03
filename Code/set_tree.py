@@ -69,13 +69,19 @@ class Set_Tree(object):
         return new_set
 
     def is_subset(self, other_set):
-        pass
-    
+        set1 = self.tree.items_in_order()
+        set2 = other_set.tree.items_in_order()
+        for element in set2:
+            if element in set1:
+                continue #continue looping
+            else:
+                return False #not all element of set2 are in set1
+        return True #finished the loop, all elements are in set1
 
 if __name__ == '__main__':
-    set_tree1 = Set_Tree([1,2,3])
-    set_tree2 = Set_Tree([2,3,6,7])
+    set_tree1 = Set_Tree([1,2,3,4])
+    set_tree2 = Set_Tree([1,2,3])
     new_set = set_tree1.difference(set_tree2)
-    print(new_set.tree.items_in_order())
+    # print(new_set.tree.items_in_order())
     # assert new_set.tree.items_in_order() == [2, 3]
-    print(new_set)
+    print(set_tree1.is_subset(set_tree2))
