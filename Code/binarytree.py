@@ -253,8 +253,8 @@ class BinarySearchTree(object):
             raise ValueError
         if node.left is None and node.right is None: #leaf node
             if node == self.root:#if node is root
-                self.root.data = None
-                # self.root = None
+                # self.root.data = None
+                self.root = None #delete the root node
                 return
                 
             #find it's parent
