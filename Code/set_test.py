@@ -7,6 +7,9 @@ class SetTreeTest(unittest.TestCase):
         elements = [2, 4, 3, 1, 5]
         set_tree = Set_Tree(elements)
         assert set_tree.size == 5
+        elements2 = []
+        set_tree2 = Set_Tree(elements2)
+        assert set_tree2.size == 0
 
     def test_size(self):
         set_tree = Set_Tree()
@@ -46,16 +49,14 @@ class SetTreeTest(unittest.TestCase):
         set_tree = Set_Tree()
         assert set_tree.contains('B') == False
         set_tree.add('B')
-        print(set_tree.tree.root)
         assert set_tree.contains('B') == True
         assert set_tree.tree.items_in_order() == ['B']
         set_tree.remove('B')
-        print(set_tree.tree.root)
         assert set_tree.contains('B') == False
         assert set_tree.tree.items_in_order() == []
-        # set_tree.add('C')
-        # assert set_tree.contains('C') == True
-        # assert set_tree.tree.items_in_order() == ['B', 'C']
+        set_tree.add('C')
+        assert set_tree.contains('C') == True
+        assert set_tree.tree.items_in_order() == ['C']
 
     def test_union(self):
         set_tree1 = Set_Tree([1,2,3])
@@ -65,6 +66,9 @@ class SetTreeTest(unittest.TestCase):
         set_tree3 = Set_Tree([2,3,4,6])
         new_set2 = set_tree1.union(set_tree3)
         assert new_set2.tree.items_in_order() == [1, 2, 3, 4, 6]
+        set_tree4 = Set_Tree()
+        new_set3 = set_tree1.union(set_tree4)
+        assert new_set3.tree.items_in_order() == [1, 2, 3]
 
     def test_intersection(self):
         set_tree1 = Set_Tree([1,2,3])
@@ -74,6 +78,9 @@ class SetTreeTest(unittest.TestCase):
         set_tree3 = Set_Tree([4,5,6])
         new_set2 = set_tree1.intersection(set_tree3)
         assert new_set2.tree.items_in_order() == [] #no items in common
+        set_tree4 = Set_Tree()
+        new_set3 = set_tree1.intersection(set_tree4)
+        assert new_set3.tree.items_in_order() == [] #no items in common
 
     def test_difference(self):
         set_tree1 = Set_Tree([1,2,3])
@@ -83,6 +90,9 @@ class SetTreeTest(unittest.TestCase):
         set_tree3 = Set_Tree([2,1, 3])
         new_set2 = set_tree1.difference(set_tree3)
         assert new_set2.tree.items_in_order() == [] #all items are similar
+        set_tree4 = Set_Tree()
+        new_set3 = set_tree1.difference(set_tree4)
+        assert new_set3.tree.items_in_order() == [1,2,3] #no items in set4
 
     def test_subset(self):
         set_tree1 = Set_Tree([1,2,3,4])
@@ -92,5 +102,6 @@ class SetTreeTest(unittest.TestCase):
         assert set_tree1.is_subset(set_tree3) == True #empty set is a subset of all sets
         set_tree4 = Set_Tree([1,2,3,5])
         assert set_tree1.is_subset(set_tree4) == False
+
 if __name__ == '__main__':
     unittest.main()
