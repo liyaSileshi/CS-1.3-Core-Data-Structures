@@ -19,7 +19,7 @@ class Set_Tree(object):
         '''
         Return true if this set contains the given element, False otherwise
         Time complexity: O(logn)
-        Space complexity: O(1)
+        Space complexity: O(logn) if recursive, O(1) if iterative
         '''
         return self.tree.contains(element)
 
@@ -37,12 +37,12 @@ class Set_Tree(object):
     def remove(self, element): 
         '''
         Removes the element from the set, if it exists
-        Time complexity: O(nlogn)
+        Time complexity: O(n) + O(logn) = O(n)
         Space complexity: O(n) getting the inorder item to find successor
         '''
         #delete from the set, if it's in the set
         #else raise key error
-        if self.contains(element): #O(logn)
+        if self.contains(element): #O(1)
             self.tree.delete(element) #O(n)
             self.size -= 1
         else:
@@ -51,8 +51,8 @@ class Set_Tree(object):
     def union(self, other_set):
         '''
         Return a new set that is the union of this set and other_set
-        Time complexity: O(m+nlog(m+n)) 
-        Space complexity:
+        Time complexity: O(mlogm) + O(nlogn)
+        Space complexity: O(m+n)
         '''
         #create a new set with items of self
         new_set = Set_Tree(self) #O(mlogm)
@@ -65,7 +65,7 @@ class Set_Tree(object):
         '''
         Return a new set that is the intersection of this set and other_set
         Time complexity: O(mlogn).O(mlog(min(m,n)))
-        Space complexity: 
+        Space complexity: O(log(min(m,n)))
         '''
         #create new set
         new_set = Set_Tree() #O(1)
