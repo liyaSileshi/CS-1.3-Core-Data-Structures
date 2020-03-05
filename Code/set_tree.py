@@ -81,21 +81,21 @@ class Set_Tree(object):
         '''
         Return a new set that is the difference of this set and other_set
         Time complexity: O(mlog(mn))
-        Space complexity: 
+        Space complexity: O(log(min(m,n)))
         '''
         #create a new set
         new_set = Set_Tree()
         #if item is in set1 but not in set2, add it
         for item in self: #O(m)
             if not other_set.contains(item):#O(logn) #if other set doesn't contain item O(logn)
-                new_set.add(item) #O(logm)
+                new_set.add(item) #O(1)
         return new_set
 
     def is_subset(self, other_set):
         '''
         Return a boolean indicating whether other_set is a subset of this set
         Time complexity: O(nlogm)
-        Space complexity: 
+        Space complexity: O(n)
         '''
         if other_set.size > self.size: #it can't be a subset if it has more items
             return False
