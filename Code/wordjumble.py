@@ -1,5 +1,5 @@
 import timeit
-from hashtable import HashTable
+
 
 import time
 def timer(func):
@@ -20,30 +20,15 @@ def unjumble(jumble_word):
         words = all_word.split('\n')
         for w in words:
             word_list.append(w)
-        sum = 0
-        for j in jumble_word:
-            sum += ord(j)
-        print(sum)
-        # print(len(jumble_word))
-    
-    for w in word_list:
-        sum_dict = 0
-        #  and sorted(w)==sorted(jumble_word)
-        if len(w) == len(jumble_word) and sorted(w) == sorted(jumble_word): #if the word in the dictionary have same length as jumble word
-            for i in w:
-                sum_dict += ord(i)
-            if sum == sum_dict: #if sum of the word is equal to sum of dict word
-                new_list.append(w)#append dictionary to new list
+    for word in jumble_word:
+        possible_words = []
+        for w in word_list:
+            if len(w) == len(jumble_word) and sorted(w) == sorted(jumble_word): #if the word in the dictionary have same length as jumble word
+                possible_words.append(w)
+            new_list[jumble_word] = possible_words #dictionary to new list
 
-
-    # print(word)
-    # print(word_list)
-    # print(ord('a'))
     print(new_list)
     return word_list
 
-unjumble('tefon')
-
- 
-
- 
+if __name__ == '__main__':
+    unjumble(['laurr', 'laisa', 'bureek','prouot'])
