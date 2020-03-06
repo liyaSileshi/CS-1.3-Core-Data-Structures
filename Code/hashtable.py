@@ -19,6 +19,18 @@ class HashTable(object):
         """Return a string representation of this hash table."""
         return 'HashTable({!r})'.format(self.items())
 
+    def __setitem__(self, key, value):
+        self.set(key, value)
+    
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __contains__(self, key):
+        return self.contains(key)
+    
+    def __len__(self):
+        return self.size
+        
     def _bucket_index(self, key):
         """Return the bucket index where the given key would be stored."""
         return hash(key) % len(self.buckets)
@@ -28,7 +40,7 @@ class HashTable(object):
         Best and worst case running time: O(1) since it's calculating and assigning value"""
         #Calculate load factor
         return self.size/len(self.buckets)
-
+    
     def keys(self):
         """Return a list of all keys in this hash table.
         Best and worst case running time: O(b.l) it's looping through each bucket and

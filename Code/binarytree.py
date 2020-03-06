@@ -204,7 +204,7 @@ class BinarySearchTree(object):
                 node = node.right
         # Not found
         return parent
-
+        
     def _find_parent_node_recursive(self, item, node, parent=None):
         """Return the parent node of the node containing the given item
         (or the parent node of where the given item would be if inserted)
@@ -252,7 +252,7 @@ class BinarySearchTree(object):
         if node is None:
             raise ValueError
         if node.left is None and node.right is None: #leaf node
-            if node == self.root:#if node is root
+            if node == self.root: #if node is root
                 # self.root.data = None
                 self.root = None #delete the root node
                 return
