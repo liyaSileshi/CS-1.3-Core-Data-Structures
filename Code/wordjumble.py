@@ -30,8 +30,11 @@ def unjumble(jumble_word):
     return new_list
 
 if __name__ == '__main__':
-    word1 = ['TEFON', 'SOKIK', 'NIUMEM', 'SICONU']
+    words1 = ['TEFON', 'SOKIK', 'NIUMEM', 'SICONU']
     pick1 = [[2,4], [0,1,3], [4], [3,4]]
-    word2 = ['laurr', 'laisa', 'bureek','prouot']
-    unjumble(word2)
-    unjumble(word1)
+    words2 = ['laurr', 'laisa', 'bureek','prouot']
+    words3 = ['TARFD', 'JOBUM', 'TENJUK', 'LETHEM']
+    
+    unjumble(words2)
+    unjumble(words1)
+    unjumble(words3)
