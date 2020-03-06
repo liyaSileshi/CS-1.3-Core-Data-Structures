@@ -20,12 +20,13 @@ def unjumble(jumble_word):
         words = all_word.split('\n')
         for w in words:
             word_list.append(w)
+
     for word in jumble_word:
         possible_words = []
         for w in word_list:
-            if len(w) == len(jumble_word) and sorted(w) == sorted(jumble_word): #if the word in the dictionary have same length as jumble word
+            if len(w) == len(word) and sorted(w) == sorted(word): #if the word in the dictionary have same length as jumble word
                 possible_words.append(w)
-            new_list[jumble_word] = possible_words #dictionary to new list
+            new_list[word] = possible_words #dictionary to new list
 
     print(new_list)
     return word_list
